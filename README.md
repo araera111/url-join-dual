@@ -1,17 +1,27 @@
-Join all arguments together and normalize the resulting URL.
+# url-join-dual
 
-## Install
+[`url-join-dual`](https://github.com/araera111/url-join-dual) is a library that joins all arguments together and normalizes the resulting URL. This library has been enhanced to be used with both ESM and CommonJS. It is based on the [url-join](https://github.com/jfromaniello/url-join) library.
+
+## Installation
 
 ```bash
-npm install url-join
+npm install url-join-dual
 ```
-
-If you want to use it directly in a browser use a CDN like [Skypack](https://www.skypack.dev/view/url-join).
 
 ## Usage
 
 ```javascript
-import urlJoin from 'url-join';
+import urlJoin from 'url-join-dual';
+
+const fullUrl = urlJoin('http://www.google.com', 'a', '/b/cd', '?foo=123', '&bar=456', '#heading-1');
+
+console.log(fullUrl.toString()); // 'http://www.google.com/a/b/cd?foo=123&bar=456#heading-1'
+```
+
+For usage with CommonJS:
+
+```javascript
+const urlJoin = require('url-join-dual');
 
 const fullUrl = urlJoin('http://www.google.com', 'a', '/b/cd', '?foo=123', '&bar=456', '#heading-1');
 
@@ -28,48 +38,11 @@ For example, the equivalent code for the above example would look as follows whe
 
 ```javascript
 const fullUrl = new URL('http://www.google.com');
-
-fullUrl.pathname = '/a/b/cd';
-fullUrl.searchParams.append('foo', '123');
-fullUrl.searchParams.append('bar', '456');
-fullUrl.hash = 'heading-1';
-
-console.log(fullUrl.toString()); // 'http://www.google.com/a/b/cd?foo=123&bar=456#heading-1'
 ```
 
-### Joining paths
+## Author
 
-This library provides the missing piece for the URL API, joining multiple paths together:
-
-```javascript
-import urlJoin from 'url-join';
-
-const fullUrl = new URL('http://www.google.com');
-
-fullUrl.pathname = urlJoin('a', '/b/cd');
-
-console.log(fullUrl.toString()); // 'http://www.google.com/a/b/cd'
-```
-
-### In Node.js
-
-If you are using Node.js, the `path/posix` module can join paths in a way that is compatible with URL pathnames:
-
-```javascript
-import { join as joinPath } from 'node:path/posix';
-
-const fullUrl = new URL('http://www.google.com');
-
-fullUrl.pathname = joinPath('a', '/b/cd');
-
-console.log(fullUrl.toString()); // 'http://www.google.com/a/b/cd'
-```
-
-### Caveats of URL API
-
-There are a couple of caveats to take into account when utilizing the standard APIs. Firstly, a `URL` must always include a complete and valid base, which means specifying the scheme and domain name (e.g. http://example.com).
-
-Secondly, it is not possible to join together and normalize the path of a URL. You must do this manually by joining your paths and then assigning the pathname property.
+KATO_Yuumin
 
 ## License
 
