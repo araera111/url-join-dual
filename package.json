@@ -1,32 +1,35 @@
 {
-  "name": "url-join",
-  "version": "5.0.0",
+  "name": "url-join-dual",
+  "version": "5.1.0",
   "description": "Join urls and normalize as in path.join.",
   "type": "module",
   "main": "./lib/url-join.js",
-  "exports": "./lib/url-join.js",
+  "exports": {
+    "import": "./lib/url-join.js",
+    "require": "./lib/url-join.cjs"
+  },
   "types": "./lib/url-join.d.ts",
   "sideEffects": false,
-  "engines": {
-    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
-  },
   "scripts": {
-    "test": "node --test"
+    "test": "node --test",
+    "bb": "tsup src/index.ts --dts --sourcemap --format esm,cjs --splitting --minify --treeshake"
   },
   "files": [
     "lib"
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/jfromaniello/url-join.git"
+    "url": "git://github.com/araera111/url-join-dual.git"
   },
   "keywords": [
     "url",
     "join"
   ],
-  "author": "José F. Romaniello <jfromaniello@gmail.com> (http://joseoncode.com)",
+  "author": "KATO_Yuumin",
   "license": "MIT",
   "devDependencies": {
-    "conventional-changelog": "^6.0.0"
+    "conventional-changelog": "^6.0.0",
+    "rollup": "^4.18.0",
+    "tsup": "^8.1.0"
   }
 }
